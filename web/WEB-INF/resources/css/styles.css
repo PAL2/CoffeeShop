@@ -1,0 +1,11 @@
+.main-link {
+    margin-left: 40%;
+    display: inline-block;
+    padding-top: 105px;
+}
+
+.main-button {
+    float: right;
+    margin-right: 40% !important;
+    margin-top: 100px !important;
+}
