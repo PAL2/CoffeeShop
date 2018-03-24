@@ -9,3 +9,8 @@
     margin-right: 40% !important;
     margin-top: 100px !important;
 }
+
+.error {
+    color: red;
+    width: 300px;
+}

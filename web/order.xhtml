@@ -2,11 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-<head>
-    <title>Заказ</title>
-</head>
+      xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+    <title>#{msg['order']}</title>
+</h:head>
 <body>
+<h:form>
+    <p:selectOneMenu value="#{order.variety}">
+        <f:selectItems value="#{coffeeVariety.coffeeVarieties}" var="y"
+                       itemLabel="#{y.name}" itemValue="#{y.name}"/>
+    </p:selectOneMenu>
+
+    <h:selectOneRadio value="#{order.delivery}">
+        <f:selectItems value="#{delivery.deliveries}" var="y"
+                       itemLabel="#{y.name}" itemValue="#{y.name}"/>
+    </h:selectOneRadio>
+
+    <p:inputNumber id="amount" value="#{order.amount}" decimalSeparator="." validator="amountValidator"/>
+
+    <p:messages for="amount" styleClass="error" autoUpdate="true"/>
+
+    <p:calendar value="#{order.date}" mindate="new Date()"/>
+
+    <p:calendar value="#{order.timeFrom}" timeOnly="true" pattern="HH:mm"/>
+
+    <p:calendar value="#{order.timeTo}" timeOnly="true" pattern="HH:mm"/>
+
+    <p:commandButton value="result" action="#{order.goOrders}"/>
+
+</h:form>
+
 
 </body>
 </html>

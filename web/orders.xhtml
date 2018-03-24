@@ -14,23 +14,18 @@
              rowClasses="order-table-odd-row,order-table-even-row">
 
     <h:column>
-        <f:facet name="header">Order No</f:facet>
+        <f:facet name="header">ID</f:facet>
         #{o.id}
     </h:column>
 
     <h:column>
-        <f:facet name="header">Product Name</f:facet>
+        <f:facet name="header">Coffee Variety</f:facet>
         #{o.name}
     </h:column>
 
     <h:column>
         <f:facet name="header">Price</f:facet>
-        #{o.id}
-    </h:column>
-
-    <h:column>
-        <f:facet name="header">Quantity</f:facet>
-        #{o.name}
+        #{o.price}
     </h:column>
 
 </h:dataTable>

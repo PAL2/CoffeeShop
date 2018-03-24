@@ -1,4 +1,4 @@
-package by.polegoshko.coffeeshop.domain.coffeeVariety;
+package by.polegoshko.coffeeshop.domain.delivery;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "coffeevariety", schema = "public")
-public class CoffeeVariety {
+@Table(name = "delivery", schema = "public")
+public class Delivery {
 
     @Id
     @GeneratedValue
@@ -17,6 +17,9 @@ public class CoffeeVariety {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "cost")
+    private Integer cost;
 
     public Integer getId() {
         return id;
@@ -32,5 +35,13 @@ public class CoffeeVariety {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getCost() {
+        return cost;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
     }
 }

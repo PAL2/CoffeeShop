@@ -1,4 +1,4 @@
-package by.polegoshko.coffeeshop.domain.coffeeVariety;
+package by.polegoshko.coffeeshop.domain.variety;
 
 import java.util.List;
 
