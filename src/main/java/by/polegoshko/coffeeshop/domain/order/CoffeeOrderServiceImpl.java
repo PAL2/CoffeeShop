@@ -1,43 +1,41 @@
-package by.polegoshko.coffeeshop.domain.delivery;
+package by.polegoshko.coffeeshop.domain.order;
 
 import java.util.List;
 
+import by.polegoshko.coffeeshop.domain.variety.CoffeeVariety;
 import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class DeliveryServiceImpl {
+public class CoffeeOrderServiceImpl {
 
     private HibernateUtil util = HibernateUtil.getInstance();
 
-    private DeliveryDAOImpl deliveryDAO = new DeliveryDAOImpl();
+    private CoffeeOrderDAOImpl coffeeOrderDAO = new CoffeeOrderDAOImpl();
 
-    public Delivery get(Integer id) {
-        Session session = util.getSession();
-        Delivery delivery = null;
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            delivery = deliveryDAO.get(id);
-            transaction.commit();
-        } catch (Exception e) {
-            transaction.rollback();
-        }
-        return delivery;
-    }
-
-    public List<Delivery> getAll() {
-        List<Delivery> deliveryList = null;
+    public void save(CoffeeOrder entity) {
         Session session = util.getSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            deliveryList = deliveryDAO.getAll();
+            coffeeOrderDAO.save(entity);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
         }
-        return deliveryList;
     }
 
+    public List<CoffeeOrder> getAll() {
+        List<CoffeeOrder> coffeeOrders = null;
+        Session session = util.getSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            coffeeOrders = coffeeOrderDAO.getAll();
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        }
+        return coffeeOrders;
+    }
 }

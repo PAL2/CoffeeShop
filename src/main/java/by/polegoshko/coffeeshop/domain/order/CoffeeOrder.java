@@ -1,22 +1,42 @@
 package by.polegoshko.coffeeshop.domain.order;
 
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "order", schema = "public")
 public class CoffeeOrder {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Integer id;
 
-    private Integer amount;
+    @Column(name = "amount")
+    private Double amount;
 
+    @Column(name = "variety")
     private String variety;
 
-    private String timeFrom;
+    @Column(name = "timeFrom")
+    private Date timeFrom;
 
-    private String timeTo;
+    @Column(name = "timeTo")
+    private Date timeTo;
 
-    private String date;
+    @Column(name = "date")
+    private Date date;
 
+    @Column(name = "delivery")
     private String delivery;
 
-    private Integer cost;
+    @Column(name = "cost")
+    private Double cost;
 
     public Integer getId() {
         return id;
@@ -26,11 +46,11 @@ public class CoffeeOrder {
         this.id = id;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -42,27 +62,27 @@ public class CoffeeOrder {
         this.variety = variety;
     }
 
-    public String getTimeFrom() {
+    public Date getTimeFrom() {
         return timeFrom;
     }
 
-    public void setTimeFrom(String timeFrom) {
+    public void setTimeFrom(Date timeFrom) {
         this.timeFrom = timeFrom;
     }
 
-    public String getTimeTo() {
+    public Date getTimeTo() {
         return timeTo;
     }
 
-    public void setTimeTo(String timeTo) {
+    public void setTimeTo(Date timeTo) {
         this.timeTo = timeTo;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -74,11 +94,11 @@ public class CoffeeOrder {
         this.delivery = delivery;
     }
 
-    public Integer getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 }

@@ -13,39 +13,40 @@
 
     <h:outputLabel value="#{msg['variety']}"/>
     <br/>
-    <p:selectOneMenu value="#{order.price}" id="price">
+    <p:selectOneMenu value="#{order.varietyId}" id="price">
         <f:selectItems value="#{coffeeVariety.coffeeVarieties}" var="variety"
-                       itemLabel="#{variety.name}" itemValue="#{variety.price}"/>
-        <f:ajax listener="#{order.changeCost}" execute="@this deliveryCost amount" render="cost"/>
+                       itemLabel="#{variety.name}" itemValue="#{variety.id}"/>
+        <f:ajax listener="#{order.changeCost}" execute="@this deliveryId amount" render="cost"/>
     </p:selectOneMenu>
 
-    <h:selectOneRadio value="#{order.deliveryCost}" id="deliveryCost">
+    <h:selectOneRadio value="#{order.deliveryId}" id="deliveryId">
         <f:selectItems value="#{delivery.deliveries}" var="delivery"
-                       itemLabel="#{delivery.name}" itemValue="#{delivery.cost}"/>
+                       itemLabel="#{delivery.name}" itemValue="#{delivery.id}"/>
         <f:ajax listener="#{order.changeCost}" execute="@this price amount" render="cost"/>
     </h:selectOneRadio>
 
     <h:outputLabel value="#{msg['amount']}"/>
     <br/>
     <p:inputNumber id="amount" value="#{order.amount}" decimalSeparator="." validator="amountValidator">
-    <f:ajax listener="#{order.changeCost}" execute="@this price deliveryCost" render="cost"/>
+        <f:ajax listener="#{order.changeCost}" execute="@this price deliveryId" render="cost"/>
     </p:inputNumber>
     <p:messages for="amount" styleClass="error" autoUpdate="true"/>
 
     <h:outputLabel value="#{msg['date']}"/>
     <br/>
-    <p:calendar value="#{order.date}" mindate="new Date()" pattern="dd-MM-yyyy"/>
+    <p:calendar value="#{order.date}" mindate="new Date()" pattern="dd-MM-yyyy" readonlyInput="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['from']}"/>
     <br/>
-    <p:calendar value="#{order.timeFrom}" timeOnly="true" pattern="HH:mm" validator="#{order.validateTimeFrom}"/>
+    <p:calendar value="#{order.timeFrom}" timeOnly="true" pattern="HH:mm" validator="#{order.validateTimeFrom}"
+                readonlyInput="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['to']}"/>
     <br/>
     <p:calendar id="timeTo" value="#{order.timeTo}" timeOnly="true" pattern="HH:mm"
-                validator="#{order.validateTimeTo}"/>
+                validator="#{order.validateTimeTo}" readonlyInput="true"/>
     <br/>
 
     <p:messages for="timeTo" styleClass="error" autoUpdate="true"/>

@@ -44,7 +44,7 @@ public class CoffeeVarietyDAOImpl {
         List<CoffeeVariety> results = null;
         try {
             Session session = util.getSession();
-            Query query  = session.createNativeQuery("SELECT t.* FROM public.\"coffeevariety\" t")
+            Query query  = session.createNativeQuery("SELECT t.* FROM public.\"variety\" t")
                 .addEntity(CoffeeVariety.class);
             results = query.list();
         } catch (HibernateException e) {

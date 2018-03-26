@@ -4,11 +4,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <head>
-    <title>Orders</title>
+    <title>#{msg['orders']}</title>
 </head>
 <body>
 
-<h:dataTable value="#{coffeeVariety.coffeeVarietyList}" var="o"
+<h:dataTable value="#{coffeeVariety.coffeeVarieties}" var="o"
              styleClass="order-table"
              headerClass="order-table-header"
              rowClasses="order-table-odd-row,order-table-even-row">

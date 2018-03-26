@@ -18,6 +18,7 @@
         <!-- Mapping -->
         <mapping class="by.polegoshko.coffeeshop.domain.variety.CoffeeVariety"/>
         <mapping class="by.polegoshko.coffeeshop.domain.delivery.Delivery"/>
+        <mapping class="by.polegoshko.coffeeshop.domain.order.CoffeeOrder"/>
 
     </session-factory>
 </hibernate-configuration>
