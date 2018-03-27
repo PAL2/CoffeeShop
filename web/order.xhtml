@@ -12,41 +12,42 @@
 <body>
 <h:form>
 
+    <h:inputHidden value="#{order.coffeeOrder.id}"/>
     <h:outputLabel value="#{msg['variety']}"/>
     <br/>
-    <p:selectOneMenu value="#{order.variety}" id="price">
+    <p:selectOneMenu value="#{order.coffeeOrder.variety}" id="price">
         <f:selectItems value="#{order.coffeeVarieties}" var="variety"
                        itemLabel="#{variety.name}" itemValue="#{variety.name}"/>
-        <f:ajax listener="#{order.changeCost}" execute="@this deliveryId amount" render="cost"/>
+        <f:ajax listener="#{order.changeCost}" execute="@this deliveryId amount" render="cost cost2"/>
     </p:selectOneMenu>
 
-    <h:selectOneRadio value="#{order.delivery}" id="deliveryId">
+    <h:selectOneRadio value="#{order.coffeeOrder.delivery}" id="deliveryId">
         <f:selectItems value="#{order.deliveries}" var="delivery"
                        itemLabel="#{delivery.name}" itemValue="#{delivery.name}"/>
-        <f:ajax listener="#{order.changeCost}" execute="@this price amount" render="cost"/>
+        <f:ajax listener="#{order.changeCost}" execute="@this price amount" render="cost cost2"/>
     </h:selectOneRadio>
 
     <h:outputLabel value="#{msg['amount']}"/>
     <br/>
-    <p:inputNumber id="amount" value="#{order.amount}" decimalSeparator="." validator="amountValidator">
-        <f:ajax listener="#{order.changeCost}" execute="@this price deliveryId" render="cost"/>
+    <p:inputNumber id="amount" value="#{order.coffeeOrder.amount}" decimalSeparator="." validator="amountValidator">
+        <f:ajax listener="#{order.changeCost}" execute="@this price deliveryId" render="cost cost2"/>
     </p:inputNumber>
     <p:messages for="amount" styleClass="error" autoUpdate="true"/>
 
     <h:outputLabel value="#{msg['date']}"/>
     <br/>
-    <p:calendar value="#{order.date}" mindate="new Date()" pattern="dd-MM-yyyy" readonlyInput="true"/>
+    <p:calendar value="#{order.coffeeOrder.date}" mindate="new Date()" pattern="dd-MM-yyyy" readonlyInput="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['from']}"/>
     <br/>
-    <p:calendar value="#{order.timeFrom}" timeOnly="true" pattern="HH:mm" validator="#{order.validateTimeFrom}"
+    <p:calendar value="#{order.coffeeOrder.timeFrom}" timeOnly="true" pattern="HH:mm" validator="#{order.validateTimeFrom}"
                 readonlyInput="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['to']}"/>
     <br/>
-    <p:calendar id="timeTo" value="#{order.timeTo}" timeOnly="true" pattern="HH:mm"
+    <p:calendar id="timeTo" value="#{order.coffeeOrder.timeTo}" timeOnly="true" pattern="HH:mm"
                 validator="#{order.validateTimeTo}" readonlyInput="true"/>
     <br/>
 
@@ -54,8 +55,9 @@
 
     <h:outputLabel value="#{msg['cost']}"/>
     <br/>
-    <h:outputText id="cost" value="#{order.cost}"/>#{msg['currency']}
+    <h:outputText id="cost" value="#{order.coffeeOrder.cost}"/>#{msg['currency']}
     <br/>
+    <h:inputHidden id="cost2" value="#{order.coffeeOrder.cost}"/>
 
     <p:commandButton value="#{msg['to.order']}" action="#{order.goOrders}"/>
 

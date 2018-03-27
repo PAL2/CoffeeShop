@@ -31,54 +31,21 @@ public class OrderController {
 
     private CoffeeOrderServiceImpl orderService = new CoffeeOrderServiceImpl();
 
-    private CoffeeOrder coffeeOrder = new CoffeeOrder();
+    private CoffeeOrder coffeeOrder;
 
     private List<CoffeeVariety> coffeeVarieties;
 
     private List<Delivery> deliveries;
 
-    private String variety;
-
-    public String getVariety() {
-        return variety;
-    }
-
-    private String delivery = "Самовывоз";
-
-    public String getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(String delivery) {
-        this.delivery = delivery;
-    }
-
-    public void setVariety(String variety) {
-        this.variety = variety;
-    }
-
-    private Double amount;
-
-    private Date date;
-
-    private Date timeFrom;
-
-    private Date timeTo;
-
-    private double cost;
-
     @PostConstruct
     private void init(){
         coffeeVarieties = varietyService.getAll();
         deliveries = deliveryService.getAll();
+        coffeeOrder = new CoffeeOrder();
+        coffeeOrder.setDelivery("Самовывоз");
     }
 
     public String goOrders() throws IOException {
-        coffeeOrder.setAmount(amount);
-        coffeeOrder.setTimeFrom(timeFrom);
-        coffeeOrder.setTimeTo(timeTo);
-        coffeeOrder.setDate(date);
-        coffeeOrder.setCost(changeCost());
         orderService.save(coffeeOrder);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
@@ -93,23 +60,16 @@ public class OrderController {
 
     public String get(Integer id){
         coffeeOrder = orderService.get(id);
-        delivery = coffeeOrder.getDelivery();
-        variety = coffeeOrder.getVariety();
-        amount = coffeeOrder.getAmount();
-        date = coffeeOrder.getDate();
-        timeFrom = coffeeOrder.getTimeFrom();
-        timeTo = coffeeOrder.getTimeTo();
-        cost = coffeeOrder.getCost();
         return "order.xhtml";
     }
 
     public void validateTimeFrom(FacesContext context, UIComponent component, Object value) {
-        this.timeFrom = (Date) value;
+        coffeeOrder.setTimeFrom((Date) value);
     }
 
     public void validateTimeTo(FacesContext context, UIComponent component, Object value) {
-        this.timeTo = (Date) value;
-        if (this.timeFrom.after(timeTo)) {
+        coffeeOrder.setTimeTo((Date) value);
+        if (coffeeOrder.getTimeFrom().after(coffeeOrder.getTimeTo())) {
             ResourceBundle resourceBundle =
                 ResourceBundle.getBundle("messages", context.getViewRoot().getLocale());
             String message = resourceBundle.getString("incorrect.date");
@@ -119,12 +79,14 @@ public class OrderController {
     }
 
     public double changeCost() {
-        CoffeeVariety coffeeVariety = varietyService.get(variety);
-        Delivery deliveryTmp = deliveryService.get(delivery);
-        coffeeOrder.setVariety(variety);
-        coffeeOrder.setDelivery(delivery);
-        cost = amount * coffeeVariety.getPrice() / 1000 + deliveryTmp.getCost();
-        return cost;
+        if (coffeeOrder.getVariety() != null && coffeeOrder.getDelivery() != null
+                && coffeeOrder.getAmount() != null) {
+            CoffeeVariety coffeeVariety = varietyService.get(coffeeOrder.getVariety());
+            Delivery deliveryTmp = deliveryService.get(coffeeOrder.getDelivery());
+            coffeeOrder.setCost(coffeeOrder.getAmount() * coffeeVariety.getPrice()
+                / 1000 + deliveryTmp.getCost());
+        }
+        return coffeeOrder.getCost();
     }
 
     public List<CoffeeOrder> getCoffeeOrders(){
@@ -147,51 +109,11 @@ public class OrderController {
         this.deliveries = deliveries;
     }
 
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
     public CoffeeOrder getCoffeeOrder() {
         return coffeeOrder;
     }
 
     public void setCoffeeOrder(CoffeeOrder coffeeOrder) {
         this.coffeeOrder = coffeeOrder;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Date getTimeFrom() {
-        return timeFrom;
-    }
-
-    public void setTimeFrom(Date timeFrom) {
-        this.timeFrom = timeFrom;
-    }
-
-    public Date getTimeTo() {
-        return timeTo;
-    }
-
-    public void setTimeTo(Date timeTo) {
-        this.timeTo = timeTo;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
     }
 }

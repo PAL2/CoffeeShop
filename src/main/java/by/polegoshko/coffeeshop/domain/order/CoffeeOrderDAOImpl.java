@@ -14,6 +14,7 @@ public class CoffeeOrderDAOImpl {
     public void save(CoffeeOrder entity) {
         try {
             Session session = util.getSession();
+            session.clear();
             session.saveOrUpdate(entity);
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -24,6 +25,7 @@ public class CoffeeOrderDAOImpl {
         List<CoffeeOrder> results = null;
         try {
             Session session = util.getSession();
+            session.clear();
             Query query  = session.createQuery("FROM CoffeeOrder");
             results = query.list();
         } catch (HibernateException e) {
@@ -36,6 +38,7 @@ public class CoffeeOrderDAOImpl {
         CoffeeOrder coffeeOrder = null;
         try {
             Session session = util.getSession();
+            session.clear();
             coffeeOrder = session.get(CoffeeOrder.class, id);
         } catch (HibernateException e) {
             e.printStackTrace();
