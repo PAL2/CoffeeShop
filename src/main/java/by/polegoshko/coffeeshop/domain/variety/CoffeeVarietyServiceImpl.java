@@ -12,7 +12,7 @@ public class CoffeeVarietyServiceImpl {
 
     private CoffeeVarietyDAOImpl coffeeVarietyDAO = new CoffeeVarietyDAOImpl();
 
-    public CoffeeVariety get(Integer id) {
+    public CoffeeVariety get(String id) {
         Session session = util.getSession();
         CoffeeVariety coffeeVariety = null;
         Transaction transaction = null;
@@ -25,7 +25,6 @@ public class CoffeeVarietyServiceImpl {
         }
         return coffeeVariety;
     }
-
 
     public void save(CoffeeVariety entity) {
         Session session = util.getSession();

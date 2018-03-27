@@ -1,16 +1,26 @@
 .main-link {
     margin-left: 40%;
     display: inline-block;
-    padding-top: 105px;
+    padding-top: 55px;
 }
 
 .main-button {
     float: right;
     margin-right: 40% !important;
-    margin-top: 100px !important;
+    margin-top: 50px !important;
 }
 
 .error {
     color: red;
     width: 300px;
+}
+
+.success {
+    color: green;
+    font-size: 22px;
+}
+
+.block {
+    text-align: center;
+    padding-top: 50px;
 }

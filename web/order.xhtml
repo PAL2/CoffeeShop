@@ -6,6 +6,7 @@
 >
 <h:head>
     <title>#{msg['order']}</title>
+    <h:outputStylesheet library="css" name="styles.css"/>
 </h:head>
 
 <body>
@@ -13,15 +14,15 @@
 
     <h:outputLabel value="#{msg['variety']}"/>
     <br/>
-    <p:selectOneMenu value="#{order.varietyId}" id="price">
-        <f:selectItems value="#{coffeeVariety.coffeeVarieties}" var="variety"
-                       itemLabel="#{variety.name}" itemValue="#{variety.id}"/>
+    <p:selectOneMenu value="#{order.variety}" id="price">
+        <f:selectItems value="#{order.coffeeVarieties}" var="variety"
+                       itemLabel="#{variety.name}" itemValue="#{variety.name}"/>
         <f:ajax listener="#{order.changeCost}" execute="@this deliveryId amount" render="cost"/>
     </p:selectOneMenu>
 
-    <h:selectOneRadio value="#{order.deliveryId}" id="deliveryId">
-        <f:selectItems value="#{delivery.deliveries}" var="delivery"
-                       itemLabel="#{delivery.name}" itemValue="#{delivery.id}"/>
+    <h:selectOneRadio value="#{order.delivery}" id="deliveryId">
+        <f:selectItems value="#{order.deliveries}" var="delivery"
+                       itemLabel="#{delivery.name}" itemValue="#{delivery.name}"/>
         <f:ajax listener="#{order.changeCost}" execute="@this price amount" render="cost"/>
     </h:selectOneRadio>
 

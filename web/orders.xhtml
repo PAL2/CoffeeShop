@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-<head>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
     <title>#{msg['orders']}</title>
-</head>
-<body>
+    <h:outputStylesheet library="css" name="styles.css"/>
+</h:head>
+<h:body>
 
-<h:dataTable value="#{coffeeVariety.coffeeVarieties}" var="o"
+<h:dataTable value="#{order.coffeeOrders}" var="o"
              styleClass="order-table"
              headerClass="order-table-header"
              rowClasses="order-table-odd-row,order-table-even-row">
 
     <h:column>
-        <f:facet name="header">ID</f:facet>
-        #{o.id}
+        #{o}
     </h:column>
 
     <h:column>
-        <f:facet name="header">Coffee Variety</f:facet>
-        #{o.name}
+        <h:form>
+            <h:commandButton action="#{order.get(o.id)}" value="#{msg['edit']}">
+                <f:param name="action" value="#{o.id}"/>
+            </h:commandButton>
+        </h:form>
     </h:column>
 
     <h:column>
-        <f:facet name="header">Price</f:facet>
-        #{o.price}
+        <h:form>
+            <h:commandButton value="#{msg['delete']}" action="#{order.get(o.id)}"/>
+        </h:form>
     </h:column>
 
 </h:dataTable>
 
-</body>
+</h:body>
 </html>

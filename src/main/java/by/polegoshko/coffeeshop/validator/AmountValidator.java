@@ -14,12 +14,13 @@ public class AmountValidator implements Validator {
 
     @Override
     public void validate(FacesContext fc, UIComponent uic, Object o) throws ValidatorException {
-        if (Double.valueOf(o.toString()) < 100) {
+        if (o != null && Double.valueOf(o.toString()) < 100) {
             ResourceBundle resourceBundle =
                 ResourceBundle.getBundle("messages", fc.getViewRoot().getLocale());
             String message = resourceBundle.getString("small.amount");
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
             throw new ValidatorException(msg);
         }
+
     }
 }

@@ -2,7 +2,6 @@ package by.polegoshko.coffeeshop.domain.order;
 
 import java.util.List;
 
-import by.polegoshko.coffeeshop.domain.variety.CoffeeVariety;
 import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -25,12 +24,22 @@ public class CoffeeOrderDAOImpl {
         List<CoffeeOrder> results = null;
         try {
             Session session = util.getSession();
-            Query query  = session.createNativeQuery("SELECT t.* FROM public.\"order\" t")
-                .addEntity(CoffeeOrder.class);
+            Query query  = session.createQuery("FROM CoffeeOrder");
             results = query.list();
         } catch (HibernateException e) {
             e.printStackTrace();
         }
         return results;
+    }
+
+    public CoffeeOrder get(Integer id) {
+        CoffeeOrder coffeeOrder = null;
+        try {
+            Session session = util.getSession();
+            coffeeOrder = session.get(CoffeeOrder.class, id);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        return coffeeOrder;
     }
 }

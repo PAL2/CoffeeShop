@@ -12,11 +12,13 @@ public class CoffeeVarietyDAOImpl {
 
     private HibernateUtil util = HibernateUtil.getInstance();
 
-    public CoffeeVariety get(Integer id) {
+    public CoffeeVariety get(String name) {
         CoffeeVariety coffeeVariety = null;
         try {
             Session session = util.getSession();
-            coffeeVariety = session.get(CoffeeVariety.class, id);
+            Query query  = session.createQuery("FROM CoffeeVariety WHERE name=:name");
+            query.setParameter("name", name);
+            coffeeVariety = (CoffeeVariety) query.uniqueResult();
         } catch (HibernateException e) {
             e.printStackTrace();
         }
@@ -44,8 +46,7 @@ public class CoffeeVarietyDAOImpl {
         List<CoffeeVariety> results = null;
         try {
             Session session = util.getSession();
-            Query query  = session.createNativeQuery("SELECT t.* FROM public.\"variety\" t")
-                .addEntity(CoffeeVariety.class);
+            Query query  = session.createQuery("FROM CoffeeVariety");
             results = query.list();
         } catch (HibernateException e) {
             e.printStackTrace();

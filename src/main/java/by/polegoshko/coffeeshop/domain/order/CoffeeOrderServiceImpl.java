@@ -4,6 +4,7 @@ import java.util.List;
 
 import by.polegoshko.coffeeshop.domain.variety.CoffeeVariety;
 import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -20,7 +21,7 @@ public class CoffeeOrderServiceImpl {
             transaction = session.beginTransaction();
             coffeeOrderDAO.save(entity);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             transaction.rollback();
         }
     }
@@ -33,9 +34,20 @@ public class CoffeeOrderServiceImpl {
             transaction = session.beginTransaction();
             coffeeOrders = coffeeOrderDAO.getAll();
             transaction.commit();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             transaction.rollback();
         }
         return coffeeOrders;
+    }
+
+    public CoffeeOrder get(Integer id) {
+        CoffeeOrder coffeeOrder = null;
+        try {
+            Session session = util.getSession();
+            coffeeOrder = session.get(CoffeeOrder.class, id);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        return coffeeOrder;
     }
 }

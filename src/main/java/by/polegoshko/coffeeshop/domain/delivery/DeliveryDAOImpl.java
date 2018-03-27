@@ -11,11 +11,13 @@ public class DeliveryDAOImpl {
 
     private HibernateUtil util = HibernateUtil.getInstance();
 
-    public Delivery get(Integer id) {
+    public Delivery get(String name) {
         Delivery delivery = null;
         try {
             Session session = util.getSession();
-            delivery = session.get(Delivery.class, id);
+            Query query  = session.createQuery("FROM Delivery WHERE name=:name");
+            query.setParameter("name", name);
+            delivery = (Delivery) query.uniqueResult();
         } catch (HibernateException e) {
             e.printStackTrace();
         }
@@ -26,8 +28,7 @@ public class DeliveryDAOImpl {
         List<Delivery> results = null;
         try {
             Session session = util.getSession();
-            Query query  = session.createNativeQuery("SELECT t.* FROM public.\"delivery\" t")
-                .addEntity(Delivery.class);
+            Query query  = session.createQuery("FROM Delivery");
             results = query.list();
         } catch (HibernateException e) {
             e.printStackTrace();

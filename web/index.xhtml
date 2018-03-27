@@ -7,7 +7,9 @@
     <title>#{msg['main.page']}</title>
     <h:outputStylesheet library="css" name="styles.css"/>
 </h:head>
-<h:outputStylesheet library="css" name="styles.css"/>
+<div class="block">
+    <h:message for="success" id="success" styleClass="success" autoUpdate="true"/>
+</div>
 <p:link outcome="order.xhtml" value="#{msg['new.order']}" styleClass="main-link"/>
 <p:button outcome="orders.xhtml" value="#{msg['orders']}" styleClass="main-button"/>
 </html>

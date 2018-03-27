@@ -1,7 +1,9 @@
 package by.polegoshko.coffeeshop.domain.order;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +38,7 @@ public class CoffeeOrder {
     private String delivery;
 
     @Column(name = "cost")
-    private Double cost;
+    private double cost;
 
     public Integer getId() {
         return id;
@@ -94,11 +96,27 @@ public class CoffeeOrder {
         this.delivery = delivery;
     }
 
-    public Double getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return amount + " гр. " + variety + " с " + timeFormat(timeFrom) + " по "
+            + timeFormat(timeTo) + " " + dateFormat(date) + " " + delivery + " - " + cost + " руб.";
+    }
+
+    private String timeFormat(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        return formatter.format(date);
+    }
+
+    private String dateFormat(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        return formatter.format(date);
     }
 }
