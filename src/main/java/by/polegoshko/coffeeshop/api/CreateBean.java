@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,31 +20,19 @@ import by.polegoshko.coffeeshop.domain.order.CoffeeOrderServiceImpl;
 import by.polegoshko.coffeeshop.domain.variety.CoffeeVariety;
 import by.polegoshko.coffeeshop.domain.variety.CoffeeVarietyServiceImpl;
 
-@ManagedBean(name = "order")
+@ManagedBean(name = "createBean")
 @RequestScoped
-public class OrderController {
+public class CreateBean {
+
+    private CoffeeOrderServiceImpl orderService = new CoffeeOrderServiceImpl();
 
     private CoffeeVarietyServiceImpl varietyService = new CoffeeVarietyServiceImpl();
 
     private DeliveryServiceImpl deliveryService = new DeliveryServiceImpl();
 
-    private CoffeeOrderServiceImpl orderService = new CoffeeOrderServiceImpl();
+    private CoffeeOrder coffeeOrder = new CoffeeOrder("Самовывоз");
 
-    private CoffeeOrder coffeeOrder;
-
-    private List<CoffeeVariety> coffeeVarieties;
-
-    private List<Delivery> deliveries;
-
-    @PostConstruct
-    private void init(){
-        coffeeVarieties = varietyService.getAll();
-        deliveries = deliveryService.getAll();
-        coffeeOrder = new CoffeeOrder();
-        coffeeOrder.setDelivery("Самовывоз");
-    }
-
-    public String goOrders() throws IOException {
+    public String saveOrder() throws IOException {
         orderService.save(coffeeOrder);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
@@ -91,22 +78,6 @@ public class OrderController {
 
     public List<CoffeeOrder> getCoffeeOrders(){
         return orderService.getAll();
-    }
-
-    public List<CoffeeVariety> getCoffeeVarieties() {
-        return coffeeVarieties;
-    }
-
-    public void setCoffeeVarieties(List<CoffeeVariety> coffeeVarieties) {
-        this.coffeeVarieties = coffeeVarieties;
-    }
-
-    public List<Delivery> getDeliveries() {
-        return deliveries;
-    }
-
-    public void setDeliveries(List<Delivery> deliveries) {
-        this.deliveries = deliveries;
     }
 
     public CoffeeOrder getCoffeeOrder() {

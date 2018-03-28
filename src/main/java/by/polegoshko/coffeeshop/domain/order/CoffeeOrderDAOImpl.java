@@ -45,4 +45,14 @@ public class CoffeeOrderDAOImpl {
         }
         return coffeeOrder;
     }
+
+    public void delete(int id) {
+        try {
+            Session session = util.getSession();
+            CoffeeOrder account = session.get(CoffeeOrder.class, id);
+            session.delete(account);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+    }
 }

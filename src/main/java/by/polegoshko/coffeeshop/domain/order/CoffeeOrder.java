@@ -3,7 +3,6 @@ package by.polegoshko.coffeeshop.domain.order;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +38,13 @@ public class CoffeeOrder {
 
     @Column(name = "cost")
     private double cost;
+
+    public CoffeeOrder() {
+    }
+
+    public CoffeeOrder(String delivery) {
+        this.delivery = delivery;
+    }
 
     public Integer getId() {
         return id;

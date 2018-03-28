@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head>
+    <title>#{msg['deleting']}</title>
+    <h:outputStylesheet library="css" name="styles.css"/>
+</h:head>
+<h:body>
+
+    <h:dataTable value="#{deleteBean.deleteOrder()}" var="o"
+                 styleClass="order-table"
+                 headerClass="order-table-header"
+                 rowClasses="table-row">
+
+        <h:column>
+            <f:facet name="header">#{msg['id']}</f:facet>
+            <h:outputText value="#{o.id}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">#{msg['table.amount']}</f:facet>
+            <h:outputText value="#{o.amount}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">#{msg['table.variety']}</f:facet>
+            <h:outputText value="#{o.variety}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">#{msg['table.from']}</f:facet>
+            <h:outputText value="#{o.timeFrom}">
+                <f:convertDateTime pattern="HH:mm"/>
+            </h:outputText>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">#{msg['table.to']}</f:facet>
+            <h:outputText value="#{o.timeTo}">
+                <f:convertDateTime pattern="HH:mm"/>
+            </h:outputText>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">#{msg['table.date']}</f:facet>
+            <h:outputText value="#{o.date}">
+                <f:convertDateTime pattern="dd.MM.yyyy"/>
+            </h:outputText>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">#{msg['delivery']}</f:facet>
+            <h:outputText value="#{o.delivery}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">#{msg['table.cost']}</f:facet>
+            <h:outputText value="#{o.cost}"/>
+        </h:column>
+
+        <h:column>
+            <h:form>
+                <h:commandButton action="#{deleteBean.delete}" value="#{msg['delete']}">
+                    <f:setPropertyActionListener target="#{deleteBean.orderId}" value="#{o.id}" />
+                </h:commandButton>
+            </h:form>
+        </h:column>
+
+    </h:dataTable>
+
+</h:body>
+</html>

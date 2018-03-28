@@ -50,4 +50,16 @@ public class CoffeeOrderServiceImpl {
         }
         return coffeeOrder;
     }
+
+    public void delete(int id) {
+        Session session = util.getSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            coffeeOrderDAO.delete(id);
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+        }
+    }
 }

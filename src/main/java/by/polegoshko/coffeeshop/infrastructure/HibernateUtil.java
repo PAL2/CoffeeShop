@@ -1,6 +1,5 @@
 package by.polegoshko.coffeeshop.infrastructure;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -33,15 +32,5 @@ public class HibernateUtil {
             sessions.set(session);
         }
         return session;
-    }
-
-    public void releaseSession(Session session) {
-        if (session != null) {
-            try {
-                sessions.remove();
-            } catch (HibernateException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

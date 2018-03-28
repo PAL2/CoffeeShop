@@ -21,6 +21,5 @@ public class AmountValidator implements Validator {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
             throw new ValidatorException(msg);
         }
-
     }
 }
