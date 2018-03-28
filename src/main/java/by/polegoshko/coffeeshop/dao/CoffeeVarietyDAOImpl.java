@@ -1,12 +1,12 @@
-package by.polegoshko.coffeeshop.domain.variety;
+package by.polegoshko.coffeeshop.dao;
 
 import java.util.List;
 
-import org.hibernate.query.Query;
-
+import by.polegoshko.coffeeshop.domain.CoffeeVariety;
 import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class CoffeeVarietyDAOImpl {
 
@@ -16,7 +16,7 @@ public class CoffeeVarietyDAOImpl {
         CoffeeVariety coffeeVariety = null;
         try {
             Session session = util.getSession();
-            Query query  = session.createQuery("FROM CoffeeVariety WHERE name=:name");
+            Query query = session.createQuery("FROM CoffeeVariety WHERE name=:name");
             query.setParameter("name", name);
             coffeeVariety = (CoffeeVariety) query.uniqueResult();
         } catch (HibernateException e) {
@@ -46,7 +46,7 @@ public class CoffeeVarietyDAOImpl {
         List<CoffeeVariety> results = null;
         try {
             Session session = util.getSession();
-            Query query  = session.createQuery("FROM CoffeeVariety");
+            Query query = session.createQuery("FROM CoffeeVariety");
             results = query.list();
         } catch (HibernateException e) {
             e.printStackTrace();

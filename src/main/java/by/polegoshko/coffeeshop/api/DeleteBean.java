@@ -7,12 +7,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import by.polegoshko.coffeeshop.domain.delivery.Delivery;
-import by.polegoshko.coffeeshop.domain.delivery.DeliveryServiceImpl;
-import by.polegoshko.coffeeshop.domain.order.CoffeeOrder;
-import by.polegoshko.coffeeshop.domain.order.CoffeeOrderServiceImpl;
-import by.polegoshko.coffeeshop.domain.variety.CoffeeVariety;
-import by.polegoshko.coffeeshop.domain.variety.CoffeeVarietyServiceImpl;
+import by.polegoshko.coffeeshop.domain.CoffeeOrder;
+import by.polegoshko.coffeeshop.domain.CoffeeVariety;
+import by.polegoshko.coffeeshop.domain.Delivery;
+import by.polegoshko.coffeeshop.service.CoffeeOrderServiceImpl;
+import by.polegoshko.coffeeshop.service.CoffeeVarietyServiceImpl;
+import by.polegoshko.coffeeshop.service.DeliveryServiceImpl;
 
 @ManagedBean(name = "deleteBean")
 @SessionScoped
@@ -33,7 +33,7 @@ public class DeleteBean {
     private Integer orderId;
 
     @PostConstruct
-    private void init(){
+    private void init() {
         coffeeVarieties = varietyService.getAll();
         deliveries = deliveryService.getAll();
     }
@@ -50,7 +50,7 @@ public class DeleteBean {
         return ordersToDelete;
     }
 
-    public String delete(){
+    public String delete() {
         orderService.delete(orderId);
         return "index.xhtml";
     }

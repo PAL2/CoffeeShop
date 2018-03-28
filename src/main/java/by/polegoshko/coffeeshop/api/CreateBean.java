@@ -13,12 +13,12 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-import by.polegoshko.coffeeshop.domain.delivery.Delivery;
-import by.polegoshko.coffeeshop.domain.delivery.DeliveryServiceImpl;
-import by.polegoshko.coffeeshop.domain.order.CoffeeOrder;
-import by.polegoshko.coffeeshop.domain.order.CoffeeOrderServiceImpl;
-import by.polegoshko.coffeeshop.domain.variety.CoffeeVariety;
-import by.polegoshko.coffeeshop.domain.variety.CoffeeVarietyServiceImpl;
+import by.polegoshko.coffeeshop.domain.CoffeeOrder;
+import by.polegoshko.coffeeshop.domain.CoffeeVariety;
+import by.polegoshko.coffeeshop.domain.Delivery;
+import by.polegoshko.coffeeshop.service.CoffeeOrderServiceImpl;
+import by.polegoshko.coffeeshop.service.CoffeeVarietyServiceImpl;
+import by.polegoshko.coffeeshop.service.DeliveryServiceImpl;
 
 @ManagedBean(name = "createBean")
 @RequestScoped
@@ -45,7 +45,7 @@ public class CreateBean {
         return "index.xhtml?faces-redirect=true";
     }
 
-    public String get(Integer id){
+    public String get(Integer id) {
         coffeeOrder = orderService.get(id);
         return "order.xhtml";
     }
@@ -67,7 +67,7 @@ public class CreateBean {
 
     public double changeCost() {
         if (coffeeOrder.getVariety() != null && coffeeOrder.getDelivery() != null
-                && coffeeOrder.getAmount() != null) {
+            && coffeeOrder.getAmount() != null) {
             CoffeeVariety coffeeVariety = varietyService.get(coffeeOrder.getVariety());
             Delivery deliveryTmp = deliveryService.get(coffeeOrder.getDelivery());
             coffeeOrder.setCost(coffeeOrder.getAmount() * coffeeVariety.getPrice()
@@ -76,7 +76,7 @@ public class CreateBean {
         return coffeeOrder.getCost();
     }
 
-    public List<CoffeeOrder> getCoffeeOrders(){
+    public List<CoffeeOrder> getCoffeeOrders() {
         return orderService.getAll();
     }
 

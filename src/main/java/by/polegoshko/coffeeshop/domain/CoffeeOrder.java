@@ -1,4 +1,4 @@
-package by.polegoshko.coffeeshop.domain.order;
+package by.polegoshko.coffeeshop.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

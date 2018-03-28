@@ -1,7 +1,8 @@
-package by.polegoshko.coffeeshop.domain.delivery;
+package by.polegoshko.coffeeshop.dao;
 
 import java.util.List;
 
+import by.polegoshko.coffeeshop.domain.Delivery;
 import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -15,7 +16,7 @@ public class DeliveryDAOImpl {
         Delivery delivery = null;
         try {
             Session session = util.getSession();
-            Query query  = session.createQuery("FROM Delivery WHERE name=:name");
+            Query query = session.createQuery("FROM Delivery WHERE name=:name");
             query.setParameter("name", name);
             delivery = (Delivery) query.uniqueResult();
         } catch (HibernateException e) {
@@ -28,7 +29,7 @@ public class DeliveryDAOImpl {
         List<Delivery> results = null;
         try {
             Session session = util.getSession();
-            Query query  = session.createQuery("FROM Delivery");
+            Query query = session.createQuery("FROM Delivery");
             results = query.list();
         } catch (HibernateException e) {
             e.printStackTrace();

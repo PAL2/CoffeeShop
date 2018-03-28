@@ -1,4 +1,4 @@
-package by.polegoshko.coffeeshop.domain.delivery;
+package by.polegoshko.coffeeshop.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

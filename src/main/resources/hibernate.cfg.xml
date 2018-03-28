@@ -16,9 +16,9 @@
         <property name="format_sql">true</property>
 
         <!-- Mapping -->
-        <mapping class="by.polegoshko.coffeeshop.domain.variety.CoffeeVariety"/>
-        <mapping class="by.polegoshko.coffeeshop.domain.delivery.Delivery"/>
-        <mapping class="by.polegoshko.coffeeshop.domain.order.CoffeeOrder"/>
+        <mapping class="by.polegoshko.coffeeshop.domain.CoffeeOrder"/>
+        <mapping class="by.polegoshko.coffeeshop.domain.CoffeeVariety"/>
+        <mapping class="by.polegoshko.coffeeshop.domain.Delivery"/>
 
     </session-factory>
 </hibernate-configuration>

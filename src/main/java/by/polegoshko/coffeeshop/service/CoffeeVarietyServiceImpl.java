@@ -1,7 +1,9 @@
-package by.polegoshko.coffeeshop.domain.variety;
+package by.polegoshko.coffeeshop.service;
 
 import java.util.List;
 
+import by.polegoshko.coffeeshop.domain.CoffeeVariety;
+import by.polegoshko.coffeeshop.dao.CoffeeVarietyDAOImpl;
 import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

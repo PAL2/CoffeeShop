@@ -1,7 +1,8 @@
-package by.polegoshko.coffeeshop.domain.order;
+package by.polegoshko.coffeeshop.dao;
 
 import java.util.List;
 
+import by.polegoshko.coffeeshop.domain.CoffeeOrder;
 import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

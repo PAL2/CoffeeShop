@@ -1,6 +1,5 @@
-package by.polegoshko.coffeeshop.domain.variety;
+package by.polegoshko.coffeeshop.domain;
 
-import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
