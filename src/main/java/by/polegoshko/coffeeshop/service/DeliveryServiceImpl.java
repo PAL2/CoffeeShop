@@ -14,13 +14,13 @@ public class DeliveryServiceImpl {
 
     private DeliveryDAOImpl deliveryDAO = new DeliveryDAOImpl();
 
-    public Delivery get(String name) {
+    public Delivery findByName(String name) {
         Session session = util.getSession();
         Delivery delivery = null;
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            delivery = deliveryDAO.get(name);
+            delivery = deliveryDAO.findByName(name);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -41,5 +41,4 @@ public class DeliveryServiceImpl {
         }
         return deliveryList;
     }
-
 }

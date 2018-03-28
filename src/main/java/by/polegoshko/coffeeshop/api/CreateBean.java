@@ -68,8 +68,8 @@ public class CreateBean {
     public double changeCost() {
         if (coffeeOrder.getVariety() != null && coffeeOrder.getDelivery() != null
             && coffeeOrder.getAmount() != null) {
-            CoffeeVariety coffeeVariety = varietyService.get(coffeeOrder.getVariety());
-            Delivery deliveryTmp = deliveryService.get(coffeeOrder.getDelivery());
+            CoffeeVariety coffeeVariety = varietyService.findByName(coffeeOrder.getVariety());
+            Delivery deliveryTmp = deliveryService.findByName(coffeeOrder.getDelivery());
             coffeeOrder.setCost(coffeeOrder.getAmount() * coffeeVariety.getPrice()
                 / 1000 + deliveryTmp.getCost());
         }

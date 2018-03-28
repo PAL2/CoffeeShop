@@ -42,12 +42,15 @@ public class CoffeeOrderServiceImpl {
     }
 
     public CoffeeOrder get(Integer id) {
+        Session session = util.getSession();
         CoffeeOrder coffeeOrder = null;
+        Transaction transaction = null;
         try {
-            Session session = util.getSession();
-            coffeeOrder = session.get(CoffeeOrder.class, id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
+            transaction = session.beginTransaction();
+            coffeeOrder = coffeeOrderDAO.get(id);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
         }
         return coffeeOrder;
     }

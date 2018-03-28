@@ -12,7 +12,7 @@ public class CoffeeVarietyDAOImpl {
 
     private HibernateUtil util = HibernateUtil.getInstance();
 
-    public CoffeeVariety get(String name) {
+    public CoffeeVariety findByName(String name) {
         CoffeeVariety coffeeVariety = null;
         try {
             Session session = util.getSession();
@@ -23,23 +23,6 @@ public class CoffeeVarietyDAOImpl {
             e.printStackTrace();
         }
         return coffeeVariety;
-    }
-
-    public void save(CoffeeVariety entity) {
-        try {
-            Session session = util.getSession();
-            session.saveOrUpdate(entity);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void update(CoffeeVariety entity) {
-
-    }
-
-    public void delete(int id) {
-
     }
 
     public List<CoffeeVariety> getAll() {

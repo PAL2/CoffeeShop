@@ -12,7 +12,7 @@ public class DeliveryDAOImpl {
 
     private HibernateUtil util = HibernateUtil.getInstance();
 
-    public Delivery get(String name) {
+    public Delivery findByName(String name) {
         Delivery delivery = null;
         try {
             Session session = util.getSession();

@@ -2,11 +2,14 @@ package by.polegoshko.coffeeshop.dao;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import by.polegoshko.coffeeshop.domain.CoffeeOrder;
 import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 public class CoffeeOrderDAOImpl {
 
@@ -27,8 +30,11 @@ public class CoffeeOrderDAOImpl {
         try {
             Session session = util.getSession();
             session.clear();
-            Query query  = session.createQuery("FROM CoffeeOrder");
-            results = query.list();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<CoffeeOrder> criteria = criteriaBuilder.createQuery(CoffeeOrder.class);
+            Root<CoffeeOrder> root = criteria.from(CoffeeOrder.class);
+            criteria.select(root);
+            results = session.createQuery(criteria).getResultList();
         } catch (HibernateException e) {
             e.printStackTrace();
         }

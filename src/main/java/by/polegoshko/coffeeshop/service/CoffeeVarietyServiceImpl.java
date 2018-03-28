@@ -14,38 +14,18 @@ public class CoffeeVarietyServiceImpl {
 
     private CoffeeVarietyDAOImpl coffeeVarietyDAO = new CoffeeVarietyDAOImpl();
 
-    public CoffeeVariety get(String id) {
+    public CoffeeVariety findByName(String name) {
         Session session = util.getSession();
         CoffeeVariety coffeeVariety = null;
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            coffeeVariety = coffeeVarietyDAO.get(id);
+            coffeeVariety = coffeeVarietyDAO.findByName(name);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
         }
         return coffeeVariety;
-    }
-
-    public void save(CoffeeVariety entity) {
-        Session session = util.getSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            coffeeVarietyDAO.save(entity);
-            transaction.commit();
-        } catch (Exception e) {
-            transaction.rollback();
-        }
-    }
-
-    public void update(CoffeeVariety entity) {
-        coffeeVarietyDAO.update(entity);
-    }
-
-    public void delete(int id) {
-        coffeeVarietyDAO.delete(id);
     }
 
     public List<CoffeeVariety> getAll() {
