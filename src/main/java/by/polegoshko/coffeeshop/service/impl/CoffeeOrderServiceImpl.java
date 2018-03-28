@@ -1,17 +1,15 @@
-package by.polegoshko.coffeeshop.service;
+package by.polegoshko.coffeeshop.service.impl;
 
 import java.util.List;
 
-import by.polegoshko.coffeeshop.dao.CoffeeOrderDAOImpl;
+import by.polegoshko.coffeeshop.dao.impl.CoffeeOrderDAOImpl;
 import by.polegoshko.coffeeshop.domain.CoffeeOrder;
-import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
+import by.polegoshko.coffeeshop.service.AbstractService;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class CoffeeOrderServiceImpl {
-
-    private HibernateUtil util = HibernateUtil.getInstance();
+public class CoffeeOrderServiceImpl extends AbstractService {
 
     private CoffeeOrderDAOImpl coffeeOrderDAO = new CoffeeOrderDAOImpl();
 

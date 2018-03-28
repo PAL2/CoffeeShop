@@ -1,16 +1,16 @@
-package by.polegoshko.coffeeshop.dao;
+package by.polegoshko.coffeeshop.dao.impl;
 
-import java.util.List;
-
+import by.polegoshko.coffeeshop.dao.AbstractDAO;
 import by.polegoshko.coffeeshop.domain.Delivery;
-import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-public class DeliveryDAOImpl {
+public class DeliveryDAOImpl extends AbstractDAO {
 
-    private HibernateUtil util = HibernateUtil.getInstance();
+    public DeliveryDAOImpl() {
+        super(Delivery.class);
+    }
 
     public Delivery findByName(String name) {
         Delivery delivery = null;
@@ -23,17 +23,5 @@ public class DeliveryDAOImpl {
             e.printStackTrace();
         }
         return delivery;
-    }
-
-    public List<Delivery> getAll() {
-        List<Delivery> results = null;
-        try {
-            Session session = util.getSession();
-            Query query = session.createQuery("FROM Delivery");
-            results = query.list();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        }
-        return results;
     }
 }

@@ -1,19 +1,16 @@
-package by.polegoshko.coffeeshop.dao;
+package by.polegoshko.coffeeshop.dao.impl;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
+import by.polegoshko.coffeeshop.dao.AbstractDAO;
+import by.polegoshko.coffeeshop.dao.DAO;
 import by.polegoshko.coffeeshop.domain.CoffeeOrder;
-import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-public class CoffeeOrderDAOImpl {
+public class CoffeeOrderDAOImpl extends AbstractDAO implements DAO {
 
-    private HibernateUtil util = HibernateUtil.getInstance();
+    public CoffeeOrderDAOImpl() {
+        super(CoffeeOrder.class);
+    }
 
     public void save(CoffeeOrder entity) {
         try {
@@ -23,22 +20,6 @@ public class CoffeeOrderDAOImpl {
         } catch (HibernateException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<CoffeeOrder> getAll() {
-        List<CoffeeOrder> results = null;
-        try {
-            Session session = util.getSession();
-            session.clear();
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<CoffeeOrder> criteria = criteriaBuilder.createQuery(CoffeeOrder.class);
-            Root<CoffeeOrder> root = criteria.from(CoffeeOrder.class);
-            criteria.select(root);
-            results = session.createQuery(criteria).getResultList();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        }
-        return results;
     }
 
     public CoffeeOrder get(Integer id) {

@@ -1,16 +1,16 @@
-package by.polegoshko.coffeeshop.dao;
+package by.polegoshko.coffeeshop.dao.impl;
 
-import java.util.List;
-
+import by.polegoshko.coffeeshop.dao.AbstractDAO;
 import by.polegoshko.coffeeshop.domain.CoffeeVariety;
-import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-public class CoffeeVarietyDAOImpl {
+public class CoffeeVarietyDAOImpl extends AbstractDAO {
 
-    private HibernateUtil util = HibernateUtil.getInstance();
+    public CoffeeVarietyDAOImpl() {
+        super(CoffeeVariety.class);
+    }
 
     public CoffeeVariety findByName(String name) {
         CoffeeVariety coffeeVariety = null;
@@ -23,17 +23,5 @@ public class CoffeeVarietyDAOImpl {
             e.printStackTrace();
         }
         return coffeeVariety;
-    }
-
-    public List<CoffeeVariety> getAll() {
-        List<CoffeeVariety> results = null;
-        try {
-            Session session = util.getSession();
-            Query query = session.createQuery("FROM CoffeeVariety");
-            results = query.list();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        }
-        return results;
     }
 }

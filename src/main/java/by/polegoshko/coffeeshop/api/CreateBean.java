@@ -16,9 +16,9 @@ import javax.faces.validator.ValidatorException;
 import by.polegoshko.coffeeshop.domain.CoffeeOrder;
 import by.polegoshko.coffeeshop.domain.CoffeeVariety;
 import by.polegoshko.coffeeshop.domain.Delivery;
-import by.polegoshko.coffeeshop.service.CoffeeOrderServiceImpl;
-import by.polegoshko.coffeeshop.service.CoffeeVarietyServiceImpl;
-import by.polegoshko.coffeeshop.service.DeliveryServiceImpl;
+import by.polegoshko.coffeeshop.service.impl.CoffeeOrderServiceImpl;
+import by.polegoshko.coffeeshop.service.impl.CoffeeVarietyServiceImpl;
+import by.polegoshko.coffeeshop.service.impl.DeliveryServiceImpl;
 
 @ManagedBean(name = "createBean")
 @RequestScoped

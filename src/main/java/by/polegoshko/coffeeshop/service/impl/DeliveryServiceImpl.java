@@ -1,16 +1,14 @@
-package by.polegoshko.coffeeshop.service;
+package by.polegoshko.coffeeshop.service.impl;
 
 import java.util.List;
 
+import by.polegoshko.coffeeshop.dao.impl.DeliveryDAOImpl;
 import by.polegoshko.coffeeshop.domain.Delivery;
-import by.polegoshko.coffeeshop.dao.DeliveryDAOImpl;
-import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
+import by.polegoshko.coffeeshop.service.AbstractService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class DeliveryServiceImpl {
-
-    private HibernateUtil util = HibernateUtil.getInstance();
+public class DeliveryServiceImpl extends AbstractService {
 
     private DeliveryDAOImpl deliveryDAO = new DeliveryDAOImpl();
 
