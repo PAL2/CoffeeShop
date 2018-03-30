@@ -30,9 +30,10 @@ public class CreateBean {
 
     private DeliveryServiceImpl deliveryService = new DeliveryServiceImpl();
 
-    private CoffeeOrder coffeeOrder = new CoffeeOrder("Самовывоз");
+    private CoffeeOrder coffeeOrder = new CoffeeOrder("Самовывоз", 0.0);
 
     public String saveOrder() throws IOException {
+        changeCost();
         orderService.save(coffeeOrder);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
@@ -51,17 +52,21 @@ public class CreateBean {
     }
 
     public void validateTimeFrom(FacesContext context, UIComponent component, Object value) {
-        coffeeOrder.setTimeFrom((Date) value);
+        if (value != null) {
+            coffeeOrder.setTimeFrom((Date) value);
+        }
     }
 
     public void validateTimeTo(FacesContext context, UIComponent component, Object value) {
-        coffeeOrder.setTimeTo((Date) value);
-        if (coffeeOrder.getTimeFrom().after(coffeeOrder.getTimeTo())) {
-            ResourceBundle resourceBundle =
-                ResourceBundle.getBundle("messages", context.getViewRoot().getLocale());
-            String message = resourceBundle.getString("incorrect.date");
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
-            throw new ValidatorException(msg);
+        if (value != null) {
+            coffeeOrder.setTimeTo((Date) value);
+            if (coffeeOrder.getTimeFrom().after(coffeeOrder.getTimeTo())) {
+                ResourceBundle resourceBundle =
+                    ResourceBundle.getBundle("messages", context.getViewRoot().getLocale());
+                String message = resourceBundle.getString("incorrect.date");
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
+                throw new ValidatorException(msg);
+            }
         }
     }
 

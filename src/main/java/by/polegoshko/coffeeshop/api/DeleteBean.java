@@ -2,10 +2,14 @@ package by.polegoshko.coffeeshop.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import by.polegoshko.coffeeshop.domain.CoffeeOrder;
 import by.polegoshko.coffeeshop.domain.CoffeeVariety;
@@ -43,8 +47,9 @@ public class DeleteBean {
     }
 
     public List<CoffeeOrder> deleteOrder() {
-        List<CoffeeOrder> ordersToDelete = new ArrayList<>();
+        List<CoffeeOrder> ordersToDelete = null;
         if (orderId != null) {
+            ordersToDelete = new ArrayList<>();
             ordersToDelete.add(orderService.get(orderId));
         }
         return ordersToDelete;
@@ -52,7 +57,15 @@ public class DeleteBean {
 
     public String delete() {
         orderService.delete(orderId);
-        return "index.xhtml";
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        ResourceBundle resourceBundle =
+            ResourceBundle.getBundle("messages", facesContext.getViewRoot().getLocale());
+        String message = resourceBundle.getString("deleted.success");
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
+        facesContext.addMessage("deleted", msg);
+        externalContext.getFlash().setKeepMessages(true);
+        return "index.xhtml?faces-redirect=true";
     }
 
     public void setOrderId(Integer orderId) {

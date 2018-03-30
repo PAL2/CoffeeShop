@@ -37,23 +37,24 @@
 
     <h:outputLabel value="#{msg['date']}"/>
     <br/>
-    <p:calendar value="#{createBean.coffeeOrder.date}" mindate="new Date()" pattern="dd-MM-yyyy" readonlyInput="true"/>
+    <p:calendar value="#{createBean.coffeeOrder.date}" mindate="new Date()" pattern="dd-MM-yyyy" readonlyInput="true"
+                id="date"/>
+    <p:messages for="date" styleClass="error" autoUpdate="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['from']}"/>
     <br/>
     <p:calendar value="#{createBean.coffeeOrder.timeFrom}" timeOnly="true" pattern="HH:mm"
-                validator="#{createBean.validateTimeFrom}"
-                readonlyInput="true"/>
+                validator="#{createBean.validateTimeFrom}" readonlyInput="true" id="timeFrom"/>
+    <p:messages for="timeFrom" styleClass="error" autoUpdate="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['to']}"/>
     <br/>
     <p:calendar id="timeTo" value="#{createBean.coffeeOrder.timeTo}" timeOnly="true" pattern="HH:mm"
                 validator="#{createBean.validateTimeTo}" readonlyInput="true"/>
-    <br/>
-
     <p:messages for="timeTo" styleClass="error" autoUpdate="true"/>
+    <br/>
 
     <h:outputLabel value="#{msg['cost']}"/>
     <br/>

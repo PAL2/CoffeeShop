@@ -55,7 +55,9 @@
     <orderEntry type="library" name="Maven: javax.annotation:jsr250-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.2.1.jre7" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.faces:jsf-api:2.2.13" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.faces:jsf-impl:2.2.13" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.faces:jsf-api:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.faces:jsf-impl:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator:6.0.7.Final" level="project" />
+    <orderEntry type="library" name="Maven: javax.validation:validation-api:2.0.1.Final" level="project" />
   </component>
 </module>
