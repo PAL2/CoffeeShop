@@ -12,6 +12,13 @@ public class CoffeeVarietyServiceImpl extends AbstractService {
 
     private CoffeeVarietyDAOImpl coffeeVarietyDAO = new CoffeeVarietyDAOImpl();
 
+    public CoffeeVarietyServiceImpl() {
+    }
+
+    CoffeeVarietyServiceImpl(CoffeeVarietyDAOImpl coffeeVarietyDAO) {
+        this.coffeeVarietyDAO = coffeeVarietyDAO;
+    }
+
     public CoffeeVariety findByName(String name) {
         Session session = util.getSession();
         CoffeeVariety coffeeVariety = null;
@@ -22,6 +29,7 @@ public class CoffeeVarietyServiceImpl extends AbstractService {
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
+            e.printStackTrace();
         }
         return coffeeVariety;
     }
@@ -36,6 +44,7 @@ public class CoffeeVarietyServiceImpl extends AbstractService {
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
+            e.printStackTrace();
         }
         return coffeeVarieties;
     }

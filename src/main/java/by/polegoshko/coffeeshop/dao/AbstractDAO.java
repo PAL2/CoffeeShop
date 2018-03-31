@@ -16,6 +16,10 @@ public abstract class AbstractDAO<T> implements DAO<T> {
 
     private Class aClass;
 
+    protected AbstractDAO(HibernateUtil util) {
+        this.util = util;
+    }
+
     protected AbstractDAO(Class aClass) {
         this.aClass = aClass;
     }

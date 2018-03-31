@@ -30,11 +30,26 @@ public class CreateBean {
 
     private DeliveryServiceImpl deliveryService = new DeliveryServiceImpl();
 
-    private CoffeeOrder coffeeOrder = new CoffeeOrder("Самовывоз", 0.0);
+    private CoffeeOrder order = new CoffeeOrder("Самовывоз", 0.0);
 
-    public String saveOrder() throws IOException {
-        changeCost();
-        orderService.save(coffeeOrder);
+    public CreateBean() {
+    }
+
+    CreateBean(
+        CoffeeOrderServiceImpl orderService,
+        CoffeeVarietyServiceImpl varietyService,
+        DeliveryServiceImpl deliveryService,
+        CoffeeOrder order
+    ) {
+        this.orderService = orderService;
+        this.varietyService = varietyService;
+        this.deliveryService = deliveryService;
+        this.order = order;
+    }
+
+    public String saveOrder(CoffeeOrder order) throws IOException {
+        changeCost(order);
+        orderService.save(order);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         ResourceBundle resourceBundle =
@@ -47,20 +62,20 @@ public class CreateBean {
     }
 
     public String get(Integer id) {
-        coffeeOrder = orderService.get(id);
+        order = orderService.get(id);
         return "order.xhtml";
     }
 
     public void validateTimeFrom(FacesContext context, UIComponent component, Object value) {
         if (value != null) {
-            coffeeOrder.setTimeFrom((Date) value);
+            order.setTimeFrom((Date) value);
         }
     }
 
     public void validateTimeTo(FacesContext context, UIComponent component, Object value) {
         if (value != null) {
-            coffeeOrder.setTimeTo((Date) value);
-            if (coffeeOrder.getTimeFrom().after(coffeeOrder.getTimeTo())) {
+            order.setTimeTo((Date) value);
+            if (order.getTimeFrom().after(order.getTimeTo())) {
                 ResourceBundle resourceBundle =
                     ResourceBundle.getBundle("messages", context.getViewRoot().getLocale());
                 String message = resourceBundle.getString("incorrect.date");
@@ -70,26 +85,24 @@ public class CreateBean {
         }
     }
 
-    public double changeCost() {
-        if (coffeeOrder.getVariety() != null && coffeeOrder.getDelivery() != null
-            && coffeeOrder.getAmount() != null) {
-            CoffeeVariety coffeeVariety = varietyService.findByName(coffeeOrder.getVariety());
-            Delivery deliveryTmp = deliveryService.findByName(coffeeOrder.getDelivery());
-            coffeeOrder.setCost(coffeeOrder.getAmount() * coffeeVariety.getPrice()
-                / 1000 + deliveryTmp.getCost());
+    public double changeCost(CoffeeOrder order) {
+        if (order.getVariety() != null && order.getDelivery() != null && order.getAmount() != null) {
+            CoffeeVariety variety = varietyService.findByName(order.getVariety());
+            Delivery delivery = deliveryService.findByName(order.getDelivery());
+            order.setCost(order.getAmount() * variety.getPrice() / 1000 + delivery.getCost());
         }
-        return coffeeOrder.getCost();
+        return order.getCost();
     }
 
     public List<CoffeeOrder> getCoffeeOrders() {
         return orderService.getAll();
     }
 
-    public CoffeeOrder getCoffeeOrder() {
-        return coffeeOrder;
+    public CoffeeOrder getOrder() {
+        return order;
     }
 
-    public void setCoffeeOrder(CoffeeOrder coffeeOrder) {
-        this.coffeeOrder = coffeeOrder;
+    public void setOrder(CoffeeOrder order) {
+        this.order = order;
     }
 }

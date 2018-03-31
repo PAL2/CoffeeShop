@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
 >
 <h:head>
     <title>#{msg['create']}</title>
@@ -12,57 +12,57 @@
 <body>
 <h:form>
 
-    <h:inputHidden value="#{createBean.coffeeOrder.id}"/>
+    <h:inputHidden value="#{createBean.order.id}"/>
     <h:outputLabel value="#{msg['variety']}"/>
     <br/>
-    <p:selectOneMenu value="#{createBean.coffeeOrder.variety}" id="price">
+    <p:selectOneMenu value="#{createBean.order.variety}" id="price">
         <f:selectItems value="#{deleteBean.coffeeVarieties}" var="variety"
                        itemLabel="#{variety.name}" itemValue="#{variety.name}"/>
-        <f:ajax listener="#{createBean.changeCost}" execute="@this deliveryId amount" render="cost cost2"/>
+        <f:ajax listener="#{createBean.changeCost(createBean.order)}" execute="@this deliveryId amount" render="cost cost2"/>
     </p:selectOneMenu>
 
-    <h:selectOneRadio value="#{createBean.coffeeOrder.delivery}" id="deliveryId">
+    <h:selectOneRadio value="#{createBean.order.delivery}" id="deliveryId">
         <f:selectItems value="#{deleteBean.deliveries}" var="delivery"
                        itemLabel="#{delivery.name}" itemValue="#{delivery.name}"/>
-        <f:ajax listener="#{createBean.changeCost}" execute="@this price amount" render="cost cost2"/>
+        <f:ajax listener="#{createBean.changeCost(createBean.order)}" execute="@this price amount" render="cost cost2"/>
     </h:selectOneRadio>
 
     <h:outputLabel value="#{msg['amount']}"/>
     <br/>
-    <p:inputNumber id="amount" value="#{createBean.coffeeOrder.amount}" decimalSeparator="."
+    <p:inputNumber id="amount" value="#{createBean.order.amount}" decimalSeparator="."
                    validator="amountValidator">
-        <f:ajax listener="#{createBean.changeCost}" execute="@this price deliveryId" render="cost cost2"/>
+        <f:ajax listener="#{createBean.changeCost(createBean.order)}" execute="@this price deliveryId" render="cost cost2"/>
     </p:inputNumber>
     <p:messages for="amount" styleClass="error" autoUpdate="true"/>
 
     <h:outputLabel value="#{msg['date']}"/>
     <br/>
-    <p:calendar value="#{createBean.coffeeOrder.date}" mindate="new Date()" pattern="dd-MM-yyyy" readonlyInput="true"
+    <p:calendar value="#{createBean.order.date}" mindate="new Date()" pattern="dd-MM-yyyy" readonlyInput="true"
                 id="date"/>
     <p:messages for="date" styleClass="error" autoUpdate="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['from']}"/>
     <br/>
-    <p:calendar value="#{createBean.coffeeOrder.timeFrom}" timeOnly="true" pattern="HH:mm"
+    <p:calendar value="#{createBean.order.timeFrom}" timeOnly="true" pattern="HH:mm"
                 validator="#{createBean.validateTimeFrom}" readonlyInput="true" id="timeFrom"/>
     <p:messages for="timeFrom" styleClass="error" autoUpdate="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['to']}"/>
     <br/>
-    <p:calendar id="timeTo" value="#{createBean.coffeeOrder.timeTo}" timeOnly="true" pattern="HH:mm"
+    <p:calendar id="timeTo" value="#{createBean.order.timeTo}" timeOnly="true" pattern="HH:mm"
                 validator="#{createBean.validateTimeTo}" readonlyInput="true"/>
     <p:messages for="timeTo" styleClass="error" autoUpdate="true"/>
     <br/>
 
     <h:outputLabel value="#{msg['cost']}"/>
     <br/>
-    <h:outputText id="cost" value="#{createBean.coffeeOrder.cost}"/>#{msg['currency']}
+    <h:outputText id="cost" value="#{createBean.order.cost}"/>#{msg['currency']}
     <br/>
-    <h:inputHidden id="cost2" value="#{createBean.coffeeOrder.cost}"/>
+    <h:inputHidden id="cost2" value="#{createBean.order.cost}"/>
 
-    <p:commandButton value="#{msg['to.order']}" action="#{createBean.saveOrder}"/>
+    <p:commandButton value="#{msg['to.order']}" action="#{createBean.saveOrder(createBean.order)}"/>
 
 </h:form>
 

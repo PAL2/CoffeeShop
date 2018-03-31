@@ -12,6 +12,13 @@ public class DeliveryServiceImpl extends AbstractService {
 
     private DeliveryDAOImpl deliveryDAO = new DeliveryDAOImpl();
 
+    public DeliveryServiceImpl() {
+    }
+
+    DeliveryServiceImpl(DeliveryDAOImpl deliveryDAO) {
+        this.deliveryDAO = deliveryDAO;
+    }
+
     public Delivery findByName(String name) {
         Session session = util.getSession();
         Delivery delivery = null;
@@ -22,6 +29,7 @@ public class DeliveryServiceImpl extends AbstractService {
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
+            e.printStackTrace();
         }
         return delivery;
     }
@@ -35,6 +43,7 @@ public class DeliveryServiceImpl extends AbstractService {
             deliveryList = deliveryDAO.getAll();
             transaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             transaction.rollback();
         }
         return deliveryList;

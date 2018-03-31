@@ -13,6 +13,13 @@ public class CoffeeOrderServiceImpl extends AbstractService {
 
     private CoffeeOrderDAOImpl coffeeOrderDAO = new CoffeeOrderDAOImpl();
 
+    public CoffeeOrderServiceImpl() {
+    }
+
+    CoffeeOrderServiceImpl(CoffeeOrderDAOImpl coffeeOrderDAO) {
+        this.coffeeOrderDAO = coffeeOrderDAO;
+    }
+
     public void save(CoffeeOrder entity) {
         Session session = util.getSession();
         Transaction transaction = null;
@@ -22,6 +29,7 @@ public class CoffeeOrderServiceImpl extends AbstractService {
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            e.printStackTrace();
         }
     }
 
@@ -35,22 +43,24 @@ public class CoffeeOrderServiceImpl extends AbstractService {
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            e.printStackTrace();
         }
         return coffeeOrders;
     }
 
     public CoffeeOrder get(Integer id) {
         Session session = util.getSession();
-        CoffeeOrder coffeeOrder = null;
+        CoffeeOrder order = null;
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            coffeeOrder = coffeeOrderDAO.get(id);
+            order = coffeeOrderDAO.get(id);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
+            e.printStackTrace();
         }
-        return coffeeOrder;
+        return order;
     }
 
     public void delete(int id) {
@@ -62,6 +72,7 @@ public class CoffeeOrderServiceImpl extends AbstractService {
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            e.printStackTrace();
         }
     }
 }

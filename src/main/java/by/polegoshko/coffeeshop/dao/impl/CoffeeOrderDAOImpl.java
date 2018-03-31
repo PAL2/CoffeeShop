@@ -3,6 +3,7 @@ package by.polegoshko.coffeeshop.dao.impl;
 import by.polegoshko.coffeeshop.dao.AbstractDAO;
 import by.polegoshko.coffeeshop.dao.DAO;
 import by.polegoshko.coffeeshop.domain.CoffeeOrder;
+import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -12,33 +13,37 @@ public class CoffeeOrderDAOImpl extends AbstractDAO implements DAO {
         super(CoffeeOrder.class);
     }
 
-    public void save(CoffeeOrder entity) {
+    CoffeeOrderDAOImpl(HibernateUtil util) {
+        super(util);
+    }
+
+    public void save(CoffeeOrder order) {
         try {
             Session session = util.getSession();
             session.clear();
-            session.saveOrUpdate(entity);
+            session.saveOrUpdate(order);
         } catch (HibernateException e) {
             e.printStackTrace();
         }
     }
 
     public CoffeeOrder get(Integer id) {
-        CoffeeOrder coffeeOrder = null;
+        CoffeeOrder order = null;
         try {
             Session session = util.getSession();
             session.clear();
-            coffeeOrder = session.get(CoffeeOrder.class, id);
+            order = session.get(CoffeeOrder.class, id);
         } catch (HibernateException e) {
             e.printStackTrace();
         }
-        return coffeeOrder;
+        return order;
     }
 
     public void delete(int id) {
         try {
             Session session = util.getSession();
-            CoffeeOrder account = session.get(CoffeeOrder.class, id);
-            session.delete(account);
+            CoffeeOrder order = session.get(CoffeeOrder.class, id);
+            session.delete(order);
         } catch (HibernateException e) {
             e.printStackTrace();
         }

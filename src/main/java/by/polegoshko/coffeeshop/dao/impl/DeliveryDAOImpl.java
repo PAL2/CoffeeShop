@@ -2,6 +2,7 @@ package by.polegoshko.coffeeshop.dao.impl;
 
 import by.polegoshko.coffeeshop.dao.AbstractDAO;
 import by.polegoshko.coffeeshop.domain.Delivery;
+import by.polegoshko.coffeeshop.infrastructure.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -10,6 +11,10 @@ public class DeliveryDAOImpl extends AbstractDAO {
 
     public DeliveryDAOImpl() {
         super(Delivery.class);
+    }
+
+    DeliveryDAOImpl(HibernateUtil util) {
+        super(util);
     }
 
     public Delivery findByName(String name) {

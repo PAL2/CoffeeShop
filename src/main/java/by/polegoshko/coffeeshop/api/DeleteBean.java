@@ -32,9 +32,30 @@ public class DeleteBean {
 
     private List<Delivery> deliveries;
 
-    private CoffeeOrder coffeeOrder;
+    private CoffeeOrder order;
 
     private Integer orderId;
+
+    public DeleteBean() {
+    }
+
+    DeleteBean(
+        CoffeeOrderServiceImpl orderService,
+        CoffeeVarietyServiceImpl varietyService,
+        DeliveryServiceImpl deliveryService,
+        List<CoffeeVariety> coffeeVarieties,
+        List<Delivery> deliveries,
+        CoffeeOrder order,
+        Integer orderId
+    ) {
+        this.orderService = orderService;
+        this.varietyService = varietyService;
+        this.deliveryService = deliveryService;
+        this.coffeeVarieties = coffeeVarieties;
+        this.deliveries = deliveries;
+        this.order = order;
+        this.orderId = orderId;
+    }
 
     @PostConstruct
     private void init() {
@@ -76,12 +97,12 @@ public class DeleteBean {
         return orderId;
     }
 
-    public CoffeeOrder getCoffeeOrder() {
-        return coffeeOrder;
+    public CoffeeOrder getOrder() {
+        return order;
     }
 
-    public void setCoffeeOrder(CoffeeOrder coffeeOrder) {
-        this.coffeeOrder = coffeeOrder;
+    public void setOrder(CoffeeOrder order) {
+        this.order = order;
     }
 
     public List<CoffeeVariety> getCoffeeVarieties() {
